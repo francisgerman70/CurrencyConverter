@@ -8,6 +8,10 @@
 import SwiftUI
 
 struct ContentView: View {
+    @State var showCurrencyConverterInfo = false
+    @State var leftAmount: String = ""
+    @State var rightAmount: String = ""
+    
     var body: some View {
        ZStack {
             // Background Image
@@ -37,14 +41,13 @@ struct ContentView: View {
                                .resizable()
                                .scaledToFit()
                                .frame(width: 50, height: 33)
-                               .padding()
-                               .background(Color.black.opacity(0.2))
                            Text("Silver Piece")
                                .fontWeight(.light)
                                .foregroundStyle(.white)
                        }
-                       TextField("Amount", text: /*@START_MENU_TOKEN@*//*@PLACEHOLDER=Value@*/.constant("")/*@END_MENU_TOKEN@*/)
-                           .background()
+                       .padding(.bottom, -5)
+                       TextField("Amount", text: $leftAmount)
+                           .textFieldStyle(.roundedBorder)
                    }
                    // Equals sign from SF symbols
                    Image(systemName: "equal")
@@ -59,23 +62,34 @@ struct ContentView: View {
                                .resizable()
                                .scaledToFit()
                                .frame(width: 50,height: 33)
-                               .padding()
-                               .background(Color.black.opacity(0.2))
                            Text("Gold Piece")
                                .fontWeight(.light)
                                .font(.headline)
                                .foregroundStyle(.white)
                        }
-                       TextField("Amount", text: /*@START_MENU_TOKEN@*//*@PLACEHOLDER=Value@*/.constant("")/*@END_MENU_TOKEN@*/)
-                           .background()
+                       .padding(.bottom, -5)
+                       TextField("Amount", text: $rightAmount)
+                           .textFieldStyle(.roundedBorder)
+                           .multilineTextAlignment(.trailing)
                    }
                }
+               .padding()
+               .background(Color.black.opacity(0.5))
+               .clipShape(Capsule())
+               
                Spacer()
-               Image(systemName: "info.circle.fill")
-                   .padding(.leading, 300.0)
-                   .font(.largeTitle)
-                   .foregroundStyle(.white)
-                   .symbolEffect(.pulse)
+               Button {
+                   showCurrencyConverterInfo.toggle()
+               } label: {
+                   Image(systemName: "info.circle.fill")
+                       .padding(.leading, 300.0)
+                       .font(.largeTitle)
+                       .foregroundStyle(.white)
+                       .symbolEffect(.pulse)
+                   }
+                   
+               
+               
            }
 //           .padding(.bottom, 60.0)
 //           .border(.blue )
